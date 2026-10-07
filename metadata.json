@@ -1,0 +1,6 @@
+{
+  "name": "RaXa Systems",
+  "description": "RaXa Systems cloud workspace, user management, and enterprise operations portal integrated with Google Sheets and Google Apps Script.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

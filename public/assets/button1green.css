@@ -1,0 +1,100 @@
+/* ==========================================================
+   button1.css  -  glowing "Explore Workspace" button (fluid)
+   Put in:  RaXa 1.0/assets/
+   Use:     <a class="rx-btn-neon" href="#">Explore Workspace</a>
+   Optional: add class "rx-btn-neon--wiggle" for the attention wiggle
+             add class "rx-btn-neon--xl" for the big hero version
+   Override color with --rx-neon on a parent or on the button itself
+
+   Everything is sized in em from one fluid font-size, so the whole
+   button (text, padding, glow) shrinks and grows with the screen.
+   ========================================================== */
+
+.rx-btn-neon {
+  --rx-neon: #95d600;
+  --rx-size: clamp(16px, 1.2vw + 11px, 22px);   /* fluid base size */
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: .9em 2.2em;
+  border: 0;
+  border-radius: 99px;
+  background: var(--rx-neon);
+  color: #0a0a0a;
+  font: 800 var(--rx-size)/1.1 "Plus Jakarta Sans", system-ui, sans-serif;
+  letter-spacing: .02em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 0 .8em var(--rx-neon);
+  animation: rx-pulse 1.6s infinite;
+  transition: transform .15s;
+}
+
+/* light sweep that glides across the button */
+.rx-btn-neon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #ffffffaa, transparent);
+  transform: skewX(-20deg);
+  animation: rx-shine 2.4s infinite;
+  pointer-events: none;
+}
+
+.rx-btn-neon:hover { transform: scale(1.06); }
+
+.rx-btn-neon:focus-visible {
+  outline: 3px solid #ffb703;
+  outline-offset: 3px;
+}
+
+@keyframes rx-pulse {
+  0%   { box-shadow: 0 0 0 0 #95d600bb, 0 0 .8em #95d600; }
+  70%  { box-shadow: 0 0 0 .9em #95d60000, 0 0 1.4em #95d600; }
+  100% { box-shadow: 0 0 0 0 #95d60000, 0 0 .8em #95d600; }
+}
+
+@keyframes rx-shine {
+  0%        { left: -60%; }
+  60%, 100% { left: 130%; }
+}
+
+/* optional wiggle */
+.rx-btn-neon--wiggle {
+  animation: rx-pulse 1.6s infinite, rx-wiggle 2.2s ease-in-out infinite;
+}
+
+@keyframes rx-wiggle {
+  0%, 55%, 100% { transform: rotate(0); }
+  60% { transform: rotate(-5deg) scale(1.04); }
+  66% { transform: rotate(5deg) scale(1.04); }
+  72% { transform: rotate(-4deg); }
+  78% { transform: rotate(3deg); }
+  84% { transform: rotate(-1.5deg); }
+  90% { transform: rotate(0); }
+}
+
+/* big version for hero / footer: scales smoothly from phone to wide desktop */
+.rx-btn-neon--xl {
+  --rx-size: clamp(20px, 2.6vw + 10px, 44px);
+  padding: .8em 1.6em;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* narrow screens: button fills the row, text keeps shrinking with the width */
+@media (max-width: 560px) {
+  .rx-btn-neon { display: block; width: 100%; padding: .9em 1em; }
+  .rx-btn-neon--xl { --rx-size: clamp(20px, 5.5vw, 28px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rx-btn-neon,
+  .rx-btn-neon::after { animation: none; }
+}

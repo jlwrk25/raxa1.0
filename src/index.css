@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #ffffff;
+  --sec: #f1f6fc;
+  --ink: #12263a;
+  --sub: #4a5d70;
+  --rx-blue: #2f72bf;
+  --rx-ico: #1f64ad;
+  --rx-lime: #95d600;
+  --rx-tile-bg: #ffffff;
+  --rx-tile-text: #12263a;
+  --rx-cloud-1: #ffffff;
+  --rx-cloud-2: #eaf2fb;
+  --card: #ffffff;
+  --line: #c5d3e2;
+  --field: #f1f6fc;
+  --ok-ink: #4a7000;
+  --trial: #ff7a45;
+  --trial-late: #ff4d4f;
+  --nav-bg: #12263a;
+  --rx-chart-line: #12263a;
+  --rx-chart-grid: #d7e0e9;
+  --rx-chart-muted: #5b6b7b;
+  --rx-chart-bg: #f1f6fc;
+  --rx-chart-text: #12263a;
+  --rx-chart-registered: #6fbf00;
+  --rx-chart-total: #7d8b9a;
+  --rx-chart-unregistered: #ff8a1f;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b1826;
+  --sec: #0f2031;
+  --ink: #eef1f7;
+  --sub: #9fb2c6;
+  --rx-blue: #3d86d6;
+  --rx-ico: #7db8f0;
+  --card: #14293e;
+  --line: #24405a;
+  --field: #0d1c2b;
+  --ok-ink: #b6ec3a;
+  --rx-tile-bg: #14293e;
+  --rx-tile-text: #eef1f7;
+  --rx-cloud-1: #1a3652;
+  --rx-cloud-2: #11263a;
+  --rx-chart-line: #eef1f7;
+  --rx-chart-grid: #24405a;
+  --rx-chart-muted: #9fb2c6;
+  --rx-chart-bg: #0f2031;
+  --rx-chart-text: #eef1f7;
+  --rx-chart-registered: #95d600;
+  --rx-chart-total: #b8c4d0;
+  --rx-chart-unregistered: #ff9b3d;
+  --nav-bg: #0c1c2e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
+}
+
+/* Neon Glow CTA button */
+.rx-btn-neon {
+  --rx-neon: #95d600;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85em 2.2em;
+  border-radius: 9999px;
+  background: var(--rx-neon);
+  color: #0b1826;
+  font-weight: 800;
+  font-size: clamp(15px, 1.2vw + 11px, 20px);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 0 0.8em var(--rx-neon);
+  animation: rx-pulse 1.8s infinite;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  overflow: hidden;
+  letter-spacing: 0.01em;
+}
+
+.rx-btn-neon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  transform: skewX(-20deg);
+  animation: rx-shine 2.6s infinite;
+  pointer-events: none;
+}
+
+.rx-btn-neon:hover {
+  transform: scale(1.04);
+}
+
+.rx-btn-neon--wiggle {
+  animation: rx-pulse 1.8s infinite, rx-wiggle 2.8s ease-in-out infinite;
+}
+
+@keyframes rx-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(149, 214, 0, 0.7), 0 0 0.8em #95d600; }
+  70%  { box-shadow: 0 0 0 0.9em rgba(149, 214, 0, 0), 0 0 1.4em #95d600; }
+  100% { box-shadow: 0 0 0 0 rgba(149, 214, 0, 0), 0 0 0.8em #95d600; }
+}
+
+@keyframes rx-shine {
+  0% { left: -60%; }
+  60%, 100% { left: 130%; }
+}
+
+@keyframes rx-wiggle {
+  0%, 60%, 100% { transform: rotate(0); }
+  65% { transform: rotate(-4deg) scale(1.03); }
+  72% { transform: rotate(4deg) scale(1.03); }
+  78% { transform: rotate(-2deg); }
+  84% { transform: rotate(2deg); }
+  90% { transform: rotate(0); }
+}
+
+/* Wires animation for Cloud */
+.rx-wire {
+  stroke: var(--rx-blue);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  fill: none;
+  opacity: 0.35;
+}
+
+.rx-flow {
+  stroke: var(--rx-lime);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 12 180;
+  fill: none;
+  animation: rx-dash 4s linear infinite;
+}
+
+@keyframes rx-dash {
+  to {
+    stroke-dashoffset: -384;
+  }
+}
+
+.rx-dot {
+  fill: var(--rx-lime);
+}
+
+.rx-dot-glow {
+  fill: var(--rx-lime);
+  opacity: 0.55;
+  filter: blur(4px);
+}
